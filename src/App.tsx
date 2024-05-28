@@ -3,8 +3,15 @@ import './App.css'
 function App() {
 
   return (
-    <div>
-      <h1 className='text-4xl text-blue-500 font-semibold tracking-tight'>Shadows Playground</h1>
+    <div id='wrapper'>
+      <div id='navbar'>Navbar</div>
+      <div id='content'>
+        <div id='sidebar'>Sidebar</div>
+        <div id='main'>
+          <div id='dashboard-content'>Dashboard Content</div>
+          <div id='shadows-panel'>Shadows Panel</div>
+        </div>
+      </div>
     </div>
   )
 }
