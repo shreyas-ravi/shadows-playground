@@ -57,26 +57,3 @@
     box-sizing: border-box;
     border-left: 2px solid rgb(244 244 245);
 }
-
-#navbar-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-
-#profile-container{
-    display: flex;
-    align-items: center;
-    flex: 1;
-    gap: 10px;
-    padding-left: 10px;
-}
-
-#link-container{
-    width: 25%;
-    padding-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
