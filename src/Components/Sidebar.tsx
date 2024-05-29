@@ -1,5 +1,3 @@
-
-
 function Sidebar() {
   return (
     <div>

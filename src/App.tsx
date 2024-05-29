@@ -1,6 +1,8 @@
 import "./App.css";
 import Sidebar from "./Components/Sidebar";
 import Navbar from "./Components/Navbar";
+import Dashboard from "./Components/Dashboard";
+import Panel from "./Components/Panel";
 
 function App() {
   return (
@@ -12,9 +14,9 @@ function App() {
         <div id="sidebar" className="bg-zinc-50">
           <Sidebar />
         </div>
-        <div id="main" className="bg-white">
-          <div id="dashboard-content">Dashboard Content</div>
-          <div id="shadows-panel">Shadows Panel</div>
+        <div id="main" className="bg-zinc-50">
+          <Dashboard />
+          <Panel />
         </div>
       </div>
     </div>

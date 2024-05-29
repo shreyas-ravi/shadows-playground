@@ -47,13 +47,3 @@
     grid-template-columns: 70% 30%;
     border-left: 2px solid rgb(244 244 245);
 }
-
-#dashboard-content{
-    box-sizing: border-box;
-
-}
-
-#shadows-panel{
-    box-sizing: border-box;
-    border-left: 2px solid rgb(244 244 245);
-}
