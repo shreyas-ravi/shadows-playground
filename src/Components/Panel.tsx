@@ -3,6 +3,7 @@ import teams from "../assets/teams.webp";
 import slack from "../assets/slack.webp";
 import github from "../assets/github.png";
 import drive from "../assets/drive.png";
+import Document from "./Document.tsx";
 
 let integrations = [
   {
@@ -27,12 +28,13 @@ let integrations = [
   },
 ];
 
-function Panel() {
+function Panel({name}:{name: string}) {
+    if(!name){
+        return null; 
+    }
   return (
-    <div className="border-l-2 border-gray-100 mt-4 ">
-      <div className="text-gray-600 bg-zinc-200 h-10 flex items-center px-2">
-        <div>Create New Shadow</div>
-      </div>
+    /*<div className="border-l-2 border-gray-100 mt-4">
+      <div className="text-gray-600 font-bold text-center">View Shadow Settings for {name}</div>
 
       <div id="integration-panel" className="mt-4 border-b-2 pb-4">
         <div className="text-gray-600 bg-zinc-200 h-10 flex items-center px-2">
@@ -101,7 +103,8 @@ function Panel() {
           </div>
         </div>
       </div>
-    </div>
+    </div>*/
+    <div><Document /></div>
   );
 }
 
