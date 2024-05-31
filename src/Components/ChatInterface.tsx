@@ -4,7 +4,13 @@ import excel from "../assets/excel.png";
 import person from "../assets/person.jpeg";
 import { useEffect, useState } from "react";
 
-function Response({ documents, chatAnswer }: { documents: any[], chatAnswer: any }) {
+function Response({
+  documents,
+  chatAnswer,
+}: {
+  documents: any[];
+  chatAnswer: any;
+}) {
   console.log(chatAnswer);
   return (
     <div id="response" className="py-8 px-8 rounded-xl border m-8 shadow-sm">
@@ -46,14 +52,18 @@ function Response({ documents, chatAnswer }: { documents: any[], chatAnswer: any
   );
 }
 
-function Question({chatQuestion}: {chatQuestion: any}) {
+function Question({ chatQuestion }: { chatQuestion: any }) {
   return (
-    <div className="flex gap-2 items-center justify-end pr-12" style={{border:"0px solid red"}}>
-      <div className="bg-stone-100 text-black rounded-full px-4 py-2">{chatQuestion}</div>
+    <div
+      className="flex gap-2 items-center justify-end pr-12"
+      style={{ border: "0px solid red" }}
+    >
+      <div className="bg-stone-100 text-black rounded-full px-4 py-2">
+        {chatQuestion}
+      </div>
       <img src={person} alt="" className="w-6 h-6 rounded-full" />
     </div>
   );
-
 }
 
 function ChatInterface({ chatHistoryEntry }: { chatHistoryEntry: any }) {
@@ -96,26 +106,22 @@ function ChatInterface({ chatHistoryEntry }: { chatHistoryEntry: any }) {
   const [chatHistory, setChatHistory] = useState<any[]>([]);
 
   useEffect(() => {
-    
-      /*setChatHistory((prev) => {
-        const newChatHistory = [...prev, chatHistoryEntry];
-        console.log(newChatHistory); // Log the updated chatHistory
-        return newChatHistory;
-      });*/
+    setChatHistory((prev) => [...prev, chatHistoryEntry]);
+  }, [chatHistoryEntry]);
 
-      setChatHistory((prev)=>[...prev, chatHistoryEntry]);
-    }
-  , [chatHistoryEntry]);
-  
   return (
     <>
       <div id="chat-interface-wrapper" className="py-10">
-      {chatHistory.map((chat: any, index) => (
-        <>
-          <div key={index} id="question"><Question chatQuestion={chat.question} /></div>
-          <div key={index} id="response"><Response documents={documents} chatAnswer={chat.answer}/></div>
-        </>
-      ))}
+        {chatHistory.map((chat: any, index) => (
+          <>
+            <div key={index} id="question">
+              <Question chatQuestion={chat.question} />
+            </div>
+            <div key={index} id="response">
+              <Response documents={documents} chatAnswer={chat.answer} />
+            </div>
+          </>
+        ))}
       </div>
     </>
   );
