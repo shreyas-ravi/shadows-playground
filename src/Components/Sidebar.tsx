@@ -44,13 +44,7 @@ function Sidebar() {
         href="#"
         className="mt-2 flex items-center p-2 text-gray-900 rounded-lg group hover:bg-gray-200"
       >
-        <span className="flex-1 ms-3 whitespace-nowrap">Memories</span>
-      </a>
-      <a
-        href="#"
-        className="mt-2 flex items-center p-2 text-gray-900 rounded-lg group hover:bg-gray-200"
-      >
-        <span className="flex-1 ms-3 whitespace-nowrap">Storage</span>
+        <span className="flex-1 ms-3 whitespace-nowrap">Create Shadow</span>
       </a>
     </div>
   );

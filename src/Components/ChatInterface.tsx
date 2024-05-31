@@ -2,16 +2,18 @@ import word from "../assets/word.png";
 import ppt from "../assets/ppt.png";
 import excel from "../assets/excel.png";
 import person from "../assets/person.jpeg";
+import { useEffect, useState } from "react";
 
-
-function Response({ documents } : { documents: any[] }) {
+function Response({ documents, chatAnswer }: { documents: any[], chatAnswer: any }) {
+  console.log(chatAnswer);
   return (
     <div id="response" className="py-8 px-8 rounded-xl border m-8 shadow-sm">
       <div className="font-bold text-md mb-2 text-transparent bg-clip-text bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
         Your Shadow
       </div>
       <div className="font-semibold text-md mb-2">
-        Here's what happened last week on Infra project V5, which aims to migrate from on-prem to cloud-based infrastructure:
+        Here's what happened last week on Infra project V5, which aims to
+        migrate from on-prem to cloud-based infrastructure:
       </div>
       <div className="text-gray-700 text-sm mb-2">
         1. Cloud Provider Selection: After evaluating several cloud service
@@ -26,9 +28,15 @@ function Response({ documents } : { documents: any[] }) {
         understanding of the scope of the project, as well as the required
         resources and timelines.
       </div>
-      <div id="document-bubbles" className="flex items-center gap-4 text-sm text-gray-600 mt-4">
+      <div
+        id="document-bubbles"
+        className="flex items-center gap-4 text-sm text-gray-600 mt-4"
+      >
         {documents.map((document) => (
-          <div key={document.id} className="flex items-center gap-2 border rounded-xl px-4 py-1">
+          <div
+            key={document.id}
+            className="flex items-center gap-2 border rounded-xl px-4 py-1"
+          >
             <img src={document.image} alt="" className="w-4 h-4" />
             <div>{document.topic}</div>
           </div>
@@ -38,7 +46,17 @@ function Response({ documents } : { documents: any[] }) {
   );
 }
 
-function ChatInterface() {
+function Question({chatQuestion}: {chatQuestion: any}) {
+  return (
+    <div className="flex gap-2 items-center justify-end pr-12" style={{border:"0px solid red"}}>
+      <div className="bg-stone-100 text-black rounded-full px-4 py-2">{chatQuestion}</div>
+      <img src={person} alt="" className="w-6 h-6 rounded-full" />
+    </div>
+  );
+
+}
+
+function ChatInterface({ chatHistoryEntry }: { chatHistoryEntry: any }) {
   let documents = [
     {
       id: "1",
@@ -75,51 +93,31 @@ function ChatInterface() {
     },
   ];
 
-  let chatHistory = [
-    {
-      id: "1",
-      question: "Hello, I need help with the Infra project v5 brief.",
-      sender: "User",
-      timestamp: "2 hours ago",
-    },
-    {
-      id: "2",
-      answer: "Sure, I can help with that. What specific information are you looking for?",
-      sender: "Assistant",
-      timestamp: "2 hours ago",
-    },
-    {
-      id: "3",
-      question: "I need details on the cloud provider selection and infrastructure assessment.",
-      sender: "User",
-      timestamp: "2 hours ago",
-    },
-    {
-      id: "4",
-      answer: "Here's what happened last week on Infra project V5, which aims to migrate from on-prem to cloud-based infrastructure:",
-      sender: "Assistant",
-      timestamp: "2 hours ago",
-    }
-  ];
+  const [chatHistory, setChatHistory] = useState<any[]>([]);
 
+  useEffect(() => {
+    
+      /*setChatHistory((prev) => {
+        const newChatHistory = [...prev, chatHistoryEntry];
+        console.log(newChatHistory); // Log the updated chatHistory
+        return newChatHistory;
+      });*/
+
+      setChatHistory((prev)=>[...prev, chatHistoryEntry]);
+    }
+  , [chatHistoryEntry]);
+  
   return (
-    <div id="chat-interface-wrapper" className="py-10" style={{ overflowY: "scroll" ,border:'0px solid red' }}>
-      {chatHistory.map((chat) => {
-        if (chat.answer) {
-          return (
-           <Response documents={documents} />
-          );
-        } else {
-          return (
-            <div className="flex gap-2 items-center justify-end pr-12" style={{border:"0px solid red"}}>
-              
-              <div className="bg-stone-100 text-black rounded-full px-4 py-2">What happened at the infra project standup?</div>
-              <img src={person} alt="" className="w-6 h-6 rounded-full" />
-            </div>
-          );
-        }
-      })}
-    </div>
+    <>
+      <div id="chat-interface-wrapper" className="py-10">
+      {chatHistory.map((chat: any, index) => (
+        <>
+          <div key={index} id="question"><Question chatQuestion={chat.question} /></div>
+          <div key={index} id="response"><Response documents={documents} chatAnswer={chat.answer}/></div>
+        </>
+      ))}
+      </div>
+    </>
   );
 }
 

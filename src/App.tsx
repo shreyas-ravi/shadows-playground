@@ -5,32 +5,47 @@ import Dashboard from "./Components/Dashboard";
 import Panel from "./Components/Panel";
 import { NameContext } from "./Contexts/NameContext";
 import { useState } from "react";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [selectedName, setSelectedName] = useState<string>("");
-  const [pane, setPane] = useState<boolean>(true); 
-  
+  const [pane, setPane] = useState<boolean>(true);
+
   return (
-    <div id="wrapper" className="bg-zinc-100">
-      <div id="navbar" className="bg-zinc-100">
-        <Navbar toggleUserSettings={() => {setPane(prev=> !prev); }} />
-      </div>
-      <div id="content">
-        <div id="sidebar" className="bg-zinc-50">
-          <NameContext.Provider value={{ selectedName, setSelectedName }}>
-            <Sidebar />
-          </NameContext.Provider>
-        </div>
-        <div
-          id="main"
-          className={`bg-zinc-50 ${pane ? "with-panel" : ""}`}
-        >
-          <Dashboard />
-          <Panel name={selectedName} pane={pane} />
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div id="wrapper" className="bg-zinc-100">
+              <div id="navbar" className="bg-zinc-100">
+                <Navbar
+                  toggleUserSettings={() => {
+                    setPane((prev) => !prev);
+                  }}
+                />
+              </div>
+              <div id="content">
+                <div id="sidebar" className="bg-zinc-50">
+                  <NameContext.Provider
+                    value={{ selectedName, setSelectedName }}
+                  >
+                    <Sidebar />
+                  </NameContext.Provider>
+                </div>
+                <div
+                  id="main"
+                  className={`bg-zinc-50 ${pane ? "with-panel" : ""}`}
+                >
+                  <Dashboard />
+                  <Panel name={selectedName} pane={pane} />
+                </div>
+              </div>
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
