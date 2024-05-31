@@ -1,4 +1,3 @@
-import "./Panel.css";
 import teams from "../assets/teams.webp";
 import slack from "../assets/slack.webp";
 import github from "../assets/github.png";
@@ -28,12 +27,18 @@ let integrations = [
   },
 ];
 
-function Panel({name}:{name: string}) {
+function Panel({name, pane}:{name: string, pane: boolean}) {
+
+    if(!pane){
+      return null;
+    }
+
     if(!name){
-        return null; 
+        return <div><Document /></div>; 
     }
   return (
-    /*<div className="border-l-2 border-gray-100 mt-4">
+   
+    <div className="border-l-2 border-gray-100 mt-4">
       <div className="text-gray-600 font-bold text-center">View Shadow Settings for {name}</div>
 
       <div id="integration-panel" className="mt-4 border-b-2 pb-4">
@@ -103,8 +108,7 @@ function Panel({name}:{name: string}) {
           </div>
         </div>
       </div>
-    </div>*/
-    <div><Document /></div>
+    </div>
   );
 }
 

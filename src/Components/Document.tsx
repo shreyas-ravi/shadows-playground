@@ -1,4 +1,3 @@
-import "./Document.css";
 import word from "../assets/word.png";
 import ppt from "../assets/ppt.png";
 import excel from "../assets/excel.png";
