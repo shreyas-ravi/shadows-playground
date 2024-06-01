@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Layout = () => {
   const [selectedName, setSelectedName] = useState<string>("");
-  const [pane, setPane] = useState<boolean>(true);
+  const [pane, setPane] = useState<boolean>(false);
 
   return (
     <div id="wrapper" className="bg-zinc-100">

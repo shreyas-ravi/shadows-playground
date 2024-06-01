@@ -1,6 +1,7 @@
 import "./App.css";
 import HomeLayout from "./Components/Home";
 import KnowledgeHub from "./Components/KnowledgeHub";
+import CreateShadow from "./Components/CreateShadow";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeLayout />} />
         <Route path="/knowledgehub" element={<KnowledgeHub />} />
-        <Route path="/createshadow" element={<div>Create Shadow</div>} />
+        <Route path="/createshadow/*" element={<CreateShadow />} />
       </Routes>
     </BrowserRouter>
   );

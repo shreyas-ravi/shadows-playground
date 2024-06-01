@@ -1,19 +1,27 @@
+import { useEffect, useState } from "react";
 import word from "../assets/word.png";
 import ppt from "../assets/ppt.png";
 import excel from "../assets/excel.png";
 import person from "../assets/person.jpeg";
-import { useEffect, useState } from "react";
 
-function Response({
-  documents,
-  chatAnswer,
-}: {
-  documents: any[];
-  chatAnswer: any;
-}) {
+function Response({ documents, chatAnswer } : any) {
   console.log(chatAnswer);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 500); // Delay the response fade-in after the question
+    return () => clearTimeout(timer);
+  }, []);
+
+  const fadeInStyle = {
+    opacity: isVisible ? 1 : 0,
+    transition: 'opacity .5s ease-in',
+  };
+
   return (
-    <div id="response" className="py-8 px-8 rounded-xl border m-8 shadow-sm">
+    <div id="response" className="py-8 px-8 rounded-xl border m-8 shadow-sm" style={fadeInStyle}>
       <div className="font-bold text-md mb-2 text-transparent bg-clip-text bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
         Your Shadow
       </div>
@@ -38,7 +46,7 @@ function Response({
         id="document-bubbles"
         className="flex items-center gap-4 text-sm text-gray-600 mt-4"
       >
-        {documents.map((document) => (
+        {documents.map((document : any) => (
           <div
             key={document.id}
             className="flex items-center gap-2 border rounded-xl px-4 py-1"
@@ -52,11 +60,25 @@ function Response({
   );
 }
 
-function Question({ chatQuestion }: { chatQuestion: any }) {
+function Question({ chatQuestion } : any) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 0); // Immediate fade-in for question
+    return () => clearTimeout(timer);
+  }, []);
+
+  const fadeInStyle = {
+    opacity: isVisible ? 1 : 0,
+    transition: 'opacity .5s ease-in',
+  };
+
   return (
     <div
       className="flex gap-2 items-center justify-end pr-12"
-      style={{ border: "0px solid red" }}
+      style={{ ...fadeInStyle, border: "0px solid red" }}
     >
       <div className="bg-stone-100 text-black rounded-full px-4 py-2">
         {chatQuestion}
@@ -66,7 +88,7 @@ function Question({ chatQuestion }: { chatQuestion: any }) {
   );
 }
 
-function ChatInterface({ chatHistoryEntry }: { chatHistoryEntry: any }) {
+function ChatInterface({ chatHistoryEntry } : any) {
   let documents = [
     {
       id: "1",
@@ -112,15 +134,15 @@ function ChatInterface({ chatHistoryEntry }: { chatHistoryEntry: any }) {
   return (
     <>
       <div id="chat-interface-wrapper" className="py-10">
-        {chatHistory.map((chat: any, index) => (
-          <>
-            <div key={index} id="question">
+        {chatHistory.map((chat, index) => (
+          <div key={index}>
+            <div id="question">
               <Question chatQuestion={chat.question} />
             </div>
-            <div key={index} id="response">
+            <div id="response">
               <Response documents={documents} chatAnswer={chat.answer} />
             </div>
-          </>
+          </div>
         ))}
       </div>
     </>
